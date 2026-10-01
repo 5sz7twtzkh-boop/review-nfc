@@ -1,0 +1,13 @@
+{% extends 'admin_base.html' %}
+{% block title %}Таблички · NFC{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">ПАНЕЛЬ УПРАВЛЕНИЯ</p><h1>Ваши таблички</h1><p class="muted">Один сервис. Отдельная ссылка для каждого бизнеса.</p></div><a class="button primary" href="{{ url_for('edit') }}">+ Создать табличку</a></div>
+<div class="table-wrap"><table><thead><tr><th>ID / Бизнес</th><th>Публичная ссылка</th><th>Статус</th><th>Действия</th></tr></thead><tbody>
+{% for plate in plates %}
+<tr><td><span class="id-label">{{ plate.id }}</span><strong class="business-name">{{ plate.business_name }}</strong></td>
+<td><a class="public-link" href="{{ url_for('review', plate_id=plate.id) }}">{{ url_for('review', plate_id=plate.id, _external=true, _scheme='https' if config.SESSION_COOKIE_SECURE else request.scheme) }}</a></td>
+<td><span class="badge {{ 'enabled' if plate.active else '' }}">{{ 'Активна' if plate.active else 'Выключена' }}</span></td>
+<td><div class="actions"><a class="button subtle" href="{{ url_for('edit', plate_id=plate.id) }}">Изменить</a><form method="post" action="{{ url_for('toggle', plate_id=plate.id) }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button subtle" type="submit">{{ 'Выключить' if plate.active else 'Включить' }}</button></form><a class="button danger-link" href="{{ url_for('remove', plate_id=plate.id) }}">Удалить</a></div></td></tr>
+{% else %}<tr><td colspan="4" class="empty">Пока нет табличек. Создайте первую.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{% block title %}NFC · Отзывы{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="{% block body_class %}public{% endblock %}">
+{% block layout %}
+<main class="card">
+  {% include 'flashes.html' %}
+  {% block content %}{% endblock %}
+</main>
+{% endblock %}
+</body>
+</html>

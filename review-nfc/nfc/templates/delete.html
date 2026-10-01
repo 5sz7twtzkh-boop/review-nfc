@@ -1,0 +1,4 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<section class="editor"><h1>Удалить табличку {{ plate.id }}?</h1><p>«{{ plate.business_name }}» будет удалена. Записанная NFC-ссылка перестанет работать.</p><form method="post" class="actions"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button danger" type="submit">Удалить табличку</button><a class="button subtle" href="{{ url_for('admin') }}">Отмена</a></form></section>
+{% endblock %}

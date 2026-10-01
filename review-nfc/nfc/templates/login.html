@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Вход · NFC{% endblock %}
+{% block content %}
+<p class="eyebrow">NFC / УПРАВЛЕНИЕ</p>
+<h1>Вход в админку</h1>
+<p class="muted">Управляйте всеми табличками в одном месте.</p>
+<form method="post" class="form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label for="password">Пароль</label>
+  <input id="password" name="password" type="password" autocomplete="current-password" required autofocus>
+  <button class="button primary" type="submit">Войти</button>
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'admin_base.html' %}
+{% block title %}{{ 'Редактирование' if plate else 'Новая табличка' }} · NFC{% endblock %}
+{% block content %}
+<a class="back" href="{{ url_for('admin') }}">← Все таблички</a>
+<section class="editor"><h1>{{ 'Редактировать табличку' if plate else 'Новая табличка' }}</h1>
+<form method="post" class="form">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label for="id">ID таблички</label><input id="id" name="id" value="{{ values.id|default('') }}" pattern="[A-Za-z0-9_-]{1,64}" maxlength="64" required placeholder="002" aria-describedby="id-help">
+<small id="id-help">Латинские буквы, цифры, дефис и подчёркивание. При изменении ID нужно заново записать NFC-метку.</small>
+<label for="business_name">Название бизнеса</label><input id="business_name" name="business_name" value="{{ values.business_name|default('') }}" maxlength="200" required placeholder="Название вашей компании">
+<label for="yandex_url">Ссылка Яндекс Карты</label><input id="yandex_url" name="yandex_url" type="url" value="{{ values.yandex_url|default('') }}" maxlength="2048" placeholder="https://yandex.ru/maps/…">
+<label for="two_gis_url">Ссылка 2ГИС</label><input id="two_gis_url" name="two_gis_url" type="url" value="{{ values.two_gis_url|default('') }}" maxlength="2048" placeholder="https://2gis.ru/…">
+<small>Пустая ссылка будет отмечена на странице как недоступная.</small>
+<label class="checkbox"><input name="active" type="checkbox" {% if (request.method == 'POST' and values.active) or (request.method != 'POST' and (not plate or plate.active)) %}checked{% endif %}> Табличка активна</label>
+<div class="actions"><button class="button primary" type="submit">Сохранить</button><a class="button subtle" href="{{ url_for('admin') }}">Отмена</a></div>
+</form></section>
+{% endblock %}
