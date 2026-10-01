@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Оставьте отзыв · {{ plate.business_name }}{% endblock %}
+{% block content %}
+<div class="review-icon" aria-hidden="true">☆</div>
+<p class="eyebrow">ВАШЕ МНЕНИЕ ВАЖНО</p>
+<h1>Оставьте отзыв</h1>
+<p class="business">{{ plate.business_name }}</p>
+<div class="services">
+  {% if plate.yandex_url %}
+  <a class="service yandex" href="{{ plate.yandex_url }}" rel="noopener noreferrer"><span>Яндекс Карты</span><span aria-hidden="true">↗</span></a>
+  {% else %}
+  <div class="unavailable"><strong>Яндекс Карты</strong><span>Ссылка пока не добавлена</span></div>
+  {% endif %}
+  {% if plate.two_gis_url %}
+  <a class="service gis" href="{{ plate.two_gis_url }}" rel="noopener noreferrer"><span>2ГИС</span><span aria-hidden="true">↗</span></a>
+  {% else %}
+  <div class="unavailable"><strong>2ГИС</strong><span>Ссылка пока не добавлена</span></div>
+  {% endif %}
+</div>
+<p class="thanks">Спасибо, что делитесь впечатлениями</p>
+{% endblock %}

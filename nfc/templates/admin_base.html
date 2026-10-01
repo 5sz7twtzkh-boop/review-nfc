@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block body_class %}dashboard{% endblock %}
+{% block layout %}
+<header class="topbar"><a class="brand" href="{{ url_for('admin') }}">NFC<span> / Управление</span></a>
+<form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button subtle" type="submit">Выйти</button></form></header>
+<main class="workspace">{% include 'flashes.html' %}{% block content %}{% endblock %}</main>
+{% endblock %}
